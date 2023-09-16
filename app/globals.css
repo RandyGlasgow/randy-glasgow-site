@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    @apply text-slate-200;
+    @apply text-slate-200 bg-black;
   }
 }
 

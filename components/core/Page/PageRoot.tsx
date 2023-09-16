@@ -6,7 +6,7 @@ export const PageRoot: FC<HTMLAttributes<HTMLElement>> = ({
 }) => {
   return (
     <main
-      className={`min-h-screen bg-gradient-to-br from-fuchsia-950 to-slate-900 ${className}`}
+      className={`min-h-screen bg-gradient-to-br from-fuchsia-950/40 to-slate-900 ${className}`}
       {...props}
     >
       {props.children}
