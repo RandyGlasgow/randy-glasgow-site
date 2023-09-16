@@ -12,6 +12,10 @@ export default function Home() {
         <NavigationBar.Root></NavigationBar.Root>
         <Page.Content className="h-screen">
           <Header.H1>Randy Glasgow</Header.H1>
+          <Header.Subtitle>
+            A software engineer with a passion for engineering elegant
+            solutions to complicated problems.
+          </Header.Subtitle>
         </Page.Content>
         <Page.Footer className="py-8 gap-4 grid">
           <Header.H4 className="text-slate-400">Made using</Header.H4>
