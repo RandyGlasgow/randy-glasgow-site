@@ -79,6 +79,7 @@ export default async function Home() {
             />
             <ProjectCard
               title={"Computology"}
+              projectLink={"https://computology.app"}
               tags={[
                 "Typescript",
                 "Microservices",
