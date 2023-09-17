@@ -10,8 +10,9 @@
 
 @layer base {
   .matrix {
+    /* make no interactive */
+
     background-color: transparent;
-    opacity: 0.8;
     background-image: repeating-radial-gradient(
         circle at 0 0,
         transparent 0,

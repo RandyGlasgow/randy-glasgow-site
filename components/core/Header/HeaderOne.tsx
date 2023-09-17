@@ -5,10 +5,7 @@ export const HeaderOne: FC<HTMLAttributes<HTMLHeadElement>> = ({
   ...props
 }) => {
   return (
-    <h1
-      className={`text-4xl font-bold text-white ${className}`}
-      {...props}
-    >
+    <h1 className={`text-4xl font-bold ${className}`} {...props}>
       {props.children}
     </h1>
   );

@@ -5,7 +5,7 @@ export const PageContent: FC<HTMLAttributes<HTMLDivElement>> = ({
   ...props
 }) => {
   return (
-    <div className={`p-2 ${className}`} {...props}>
+    <div className={`p-2 max-w-5xl mx-auto ${className}`} {...props}>
       {props.children}
     </div>
   );
