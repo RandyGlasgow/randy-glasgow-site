@@ -38,8 +38,8 @@ export default async function Home() {
             experiences that delight.
           </Subtitle>
         </Page.Content>
-        <Page.Content id="Core Compentencies">
-          <HeaderTwo className="text-center">Core Compentencies</HeaderTwo>
+        <Page.Content id="Core Competencies">
+          <HeaderTwo className="text-center">Core Competencies</HeaderTwo>
           <div className="flex sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
             <KeywordGroup
               keywords={[
@@ -64,9 +64,9 @@ export default async function Home() {
             />
           </div>
         </Page.Content>
-        <Page.Content id="Launguages & Frameworks">
+        <Page.Content id="Languages & Frameworks">
           <HeaderTwo className="text-center">
-            Launguages & Frameworks
+            Languages & Frameworks
           </HeaderTwo>
           <div className="flex sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
             {[
