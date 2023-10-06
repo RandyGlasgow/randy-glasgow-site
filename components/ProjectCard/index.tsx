@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FC } from "react";
 import { FaBoxOpen } from "react-icons/fa6";
-import Card from "../core/Card";
-import Header from "../core/Header";
+import { CardContent, CardRoot } from "../core/Card";
+import { HeaderThree } from "../core/Header";
 
 interface ProjectCardProps {
   title: string;
@@ -17,9 +17,9 @@ export const ProjectCard: FC<ProjectCardProps> = ({
   title,
 }) => {
   return (
-    <Card.Root className="max-w-sm backdrop-blur-[1px] hover:backdrop-blur-sm hover:shadow-lg hover:shadow-fuchsia-600/90 transition-all duration-150 ease-in-out hover:text-white">
-      <Card.Content className="p-4">
-        <Header.H3 className="flex justify-between items-center">
+    <CardRoot className="max-w-sm backdrop-blur-[1px] hover:backdrop-blur-sm hover:shadow-lg hover:shadow-fuchsia-600/70 transition-all duration-150 ease-in-out hover:text-white">
+      <CardContent className="p-4">
+        <HeaderThree className="flex justify-between items-center">
           <span>{title}</span>
           {projectLink && (
             <Link
@@ -30,7 +30,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({
               <span>Project</span>
             </Link>
           )}
-        </Header.H3>
+        </HeaderThree>
         <p>{description}</p>
         <span className="flex items-center justify-start mt-2 gap-x-4 flex-wrap">
           {tags.map((elm) => (
@@ -39,7 +39,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({
             </span>
           ))}
         </span>
-      </Card.Content>
-    </Card.Root>
+      </CardContent>
+    </CardRoot>
   );
 };

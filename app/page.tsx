@@ -1,4 +1,9 @@
-import Header from "@/components/core/Header";
+import {
+  HeaderOne,
+  Subtitle,
+  HeaderTwo,
+  HeaderFour,
+} from "@/components/core/Header";
 import NavigationBar from "@/components/core/NavigationBar";
 import Page from "@/components/core/Page";
 import Link from "next/link";
@@ -6,65 +11,94 @@ import { FaReact } from "react-icons/fa6/index";
 import { TbBrandNextjs } from "react-icons/tb/index";
 import { SiTailwindcss } from "react-icons/si/index";
 import { ProjectCard } from "@/components/ProjectCard";
+import { KeywordGroup } from "@/components/KeywordGroup/indext";
+import { StrengthBar } from "@/components/StrengthBar";
+import { ToolsAndTech } from "@/components/ToolsAndTech";
+import Image from "next/image";
+import ProfilePhoto from "@/public/RandyGlasgow.jpeg";
 
 export default async function Home() {
   return (
     <Page.Root>
       <div className="min-h-screen matrix">
         <NavigationBar.Root></NavigationBar.Root>
-        <Page.Content>
-          <span>
-            <Header.H1 className="text-white">Randy Glasgow</Header.H1>
-            <Header.Subtitle>
-              A software engineer with a passion for engineering elegant
-              solutions to complicated problems.
-            </Header.Subtitle>
-          </span>
+        <Page.Content className="text-center">
+          <HeaderOne className="text-white">Randy Glasgow</HeaderOne>
+          <Image
+            src={ProfilePhoto}
+            quality={40}
+            loading="eager"
+            alt="Randy Glasgow"
+            className="mx-auto rounded-full overflow-hidden object-cover object-center border border-slate-400 h-80 w-80 m-10 border-dashed border-spacing-2 p-2"
+          />
+          <Subtitle>
+            Frontend Software Engineer with a passion for building
+            experiences that delight.
+          </Subtitle>
+        </Page.Content>
+        <Page.Content id="Core Compentencies">
+          <HeaderTwo className="text-center">Core Compentencies</HeaderTwo>
+          <div className="flex sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
+            <KeywordGroup
+              keywords={[
+                "Agile",
+                "Architecture",
+                "Code Coverage",
+                "Collaboration",
+                "Communication",
+                "Cost Containment",
+                "Developer Experience",
+                "Distributed Systems",
+                "Frontend Engineering",
+                "Microservices",
+                "Process Improvement",
+                "Project Management",
+                "SEO",
+                "Software Engineering",
+                "Strategic Planning",
+                "Team Leadership",
+                "User Experience",
+              ].sort()}
+            />
+          </div>
+        </Page.Content>
+        <Page.Content id="Launguages & Frameworks">
+          <HeaderTwo className="text-center">
+            Launguages & Frameworks
+          </HeaderTwo>
+          <div className="flex sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
+            {[
+              { label: "React", strength: 95 },
+              { label: "Typescript", strength: 90 },
+              { label: "Javascript", strength: 95 },
+              { label: "HTML", strength: 93 },
+              { label: "CSS", strength: 90 },
+              { label: "Tailwindcss", strength: 90 },
+              { label: "NextJs", strength: 92 },
+              { label: "NodeJs", strength: 88 },
+              { label: "Rust", strength: 55 },
+              { label: "Python", strength: 60 },
+            ]
+              .sort((a, b) => b.strength - a.strength)
+              .map((elm) => (
+                <StrengthBar label={elm.label} strength={elm.strength} />
+              ))}
+          </div>
         </Page.Content>
         <Page.Content>
-          <Header.H2>About Me</Header.H2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Fugiat deleniti nostrum aperiam id obcaecati saepe
-            voluptatibus, sequi cumque maiores reprehenderit perspiciatis
-            dolor. Qui ad deserunt alias accusamus quas aut sit iusto
-            delectus odio doloremque quaerat, voluptate asperiores
-            perferendis velit tempore illum explicabo, amet quo cumque in
-            dolores quidem inventore quos? Culpa velit ad repellendus odit
-            distinctio sed, quia hic, autem consequuntur aut eveniet
-            reprehenderit veniam, atque et! Quisquam ducimus labore unde?
-            Eaque quo fugiat, ut beatae consequuntur quasi quia? Nulla
-            commodi assumenda eum voluptates expedita suscipit debitis
-            aliquam, sed, ipsa, numquam quod rerum a quas officia? Non
-            laboriosam adipisci delectus id, quam eius vero? Modi animi
-            mollitia inventore dolorum quae aperiam adipisci perspiciatis?
-            Aperiam dignissimos ducimus nesciunt deserunt, eveniet
-            assumenda voluptas optio libero! Assumenda at ipsum accusamus
-            excepturi incidunt recusandae aliquid eveniet deserunt
-            molestiae eos non placeat, expedita laborum perspiciatis
-            voluptas delectus consequuntur deleniti similique amet?
-            Perferendis aut veniam quo nulla quae velit ipsam deserunt
-            consectetur tempore distinctio fugiat, expedita, suscipit optio
-            architecto. Rerum nobis magnam fuga amet commodi non est, odit
-            molestiae odio ratione, mollitia dolor molestias distinctio
-            recusandae expedita quaerat pariatur sit nemo tempora sapiente?
-            Quia, nisi. Autem unde ea cupiditate soluta excepturi,
-            consectetur exercitationem molestias! Ad repellat cum, quaerat
-            quidem ab a, vitae fugiat aliquid, natus voluptatibus illum
-            deleniti unde voluptate. Assumenda ipsam doloribus placeat
-            dolorum nostrum nulla commodi dignissimos quidem doloremque
-            nihil. Omnis blanditiis quas hic pariatur possimus, deserunt,
-            rerum architecto placeat, maxime atque commodi corporis a
-            ullam. Quidem, dicta assumenda? Iusto deleniti explicabo
-            architecto eaque.
-          </p>
+          <HeaderTwo className="text-center">
+            Tools & Technologies
+          </HeaderTwo>
+          <div className="my-8">
+            <ToolsAndTech />
+          </div>
         </Page.Content>
         <Page.Content>
-          <Header.H2 className="">Projects</Header.H2>
+          <HeaderTwo className="">Projects</HeaderTwo>
           <div className="flex flex-col sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
             <ProjectCard
               title={"Relay It"}
-              projectLink={"https://relay-it.dev"}
+              // projectLink={"https://relay-it.dev"}
               tags={["Javascript", "NextJs", "Tailwindcss", "APIs"]}
               description={
                 "A utility first API that helps you write better code without changing the way you work. All the HTTP response status codes available from one convenient API."
@@ -79,7 +113,7 @@ export default async function Home() {
             />
             <ProjectCard
               title={"Computology"}
-              projectLink={"https://computology.app"}
+              // projectLink={"https://computology.app"}
               tags={[
                 "Typescript",
                 "Microservices",
@@ -95,7 +129,7 @@ export default async function Home() {
           </div>
         </Page.Content>
         <Page.Footer className="py-8 gap-4 grid">
-          <Header.H4 className="text-slate-400">Made using</Header.H4>
+          <HeaderFour className="text-slate-400">Made using</HeaderFour>
           <div className="flex mx-auto items-center justify-center gap-3">
             <Link href="https://nextjs.org/">
               <TbBrandNextjs className="text-3xl text-slate-400 hover:text-white" />

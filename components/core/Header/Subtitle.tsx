@@ -5,12 +5,12 @@ export const Subtitle: FC<HTMLAttributes<HTMLHeadingElement>> = ({
   ...props
 }) => {
   return (
-    <span
+    <h6
       role="note"
       className={`font-light text-sm ${className}`}
       {...props}
     >
       {props.children}
-    </span>
+    </h6>
   );
 };
