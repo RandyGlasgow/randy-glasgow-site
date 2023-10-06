@@ -23,7 +23,9 @@ export default async function Home() {
       <div className="min-h-screen matrix">
         <NavigationBar.Root></NavigationBar.Root>
         <Page.Content className="text-center">
-          <HeaderOne className="text-white">Randy Glasgow</HeaderOne>
+          <HeaderOne className="text-white text-6xl">
+            Randy Glasgow
+          </HeaderOne>
           <Image
             src={ProfilePhoto}
             quality={40}
