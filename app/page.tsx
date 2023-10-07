@@ -7,6 +7,8 @@ import {
 import NavigationBar from "@/components/core/NavigationBar";
 import Page from "@/components/core/Page";
 import Link from "next/link";
+import Image from "next/image";
+import ProfilePhoto from "@/public/RandyGlasgow.jpeg";
 import { FaReact } from "react-icons/fa6/index";
 import { TbBrandNextjs } from "react-icons/tb/index";
 import { SiTailwindcss } from "react-icons/si/index";
@@ -14,8 +16,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { KeywordGroup } from "@/components/KeywordGroup/indext";
 import { StrengthBar } from "@/components/StrengthBar";
 import { ToolsAndTech } from "@/components/ToolsAndTech";
-import Image from "next/image";
-import ProfilePhoto from "@/public/RandyGlasgow.jpeg";
+import Guestbook from "@/components/Guestbook";
 
 export default async function Home() {
   return (
@@ -33,10 +34,7 @@ export default async function Home() {
             alt="Randy Glasgow"
             className="mx-auto rounded-full overflow-hidden object-cover object-center border border-slate-400 h-80 w-80 m-10 border-dashed border-spacing-2 p-2"
           />
-          <Subtitle>
-            Frontend Software Engineer with a passion for building
-            experiences that delight.
-          </Subtitle>
+          <Guestbook />
         </Page.Content>
         <Page.Content id="Core Competencies">
           <HeaderTwo className="text-center">Core Competencies</HeaderTwo>
