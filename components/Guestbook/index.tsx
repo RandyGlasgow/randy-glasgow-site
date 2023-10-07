@@ -71,7 +71,7 @@ const Guestbook = () => {
                 <div
                   key={guest._id}
                   id={guest._id}
-                  className="border-b border-stone-700 text-left p-2"
+                  className="border-b last:border-none border-stone-700 text-left p-2"
                 >
                   <div className="flex justify-between items-center w-full">
                     <div className="">
