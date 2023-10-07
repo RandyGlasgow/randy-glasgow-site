@@ -20,7 +20,7 @@ const Guestbook = () => {
       </button>
       {isOpen && (
         <div className="absolute w-full h-screen top-0 left-0 flex justify-center items-center backdrop-blur-sm z-50 bg-black/20">
-          <div className="w-1/2 z-50 rounded-lg overflow-hidden shadow-2xl">
+          <div className="w-full md:w-2/3 lg:1/2 z-50 rounded-lg overflow-hidden shadow-2xl">
             <GuestbookControls onClick={() => setOpen(false)} />
             <GuestbookLog />
             <GuestbookForm />

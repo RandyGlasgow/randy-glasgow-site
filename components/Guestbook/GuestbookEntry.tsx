@@ -8,7 +8,9 @@ export const GuestbookEntry: FC<typeof addEntry> = ({
   entryId,
   message,
   name,
+  ...rest
 }) => {
+  console.log(rest);
   return (
     <div className="p-2 rounded-sm" key={String(entryId)}>
       <div className="flex justify-between">
@@ -16,7 +18,9 @@ export const GuestbookEntry: FC<typeof addEntry> = ({
           {String(name)}
           <span className="text-lg text-gray-500">@{String(company)}</span>
         </span>
-        <span>{dayjs(String(date)).format("MMM DD, YYYY")}</span>
+        <span>
+          {/* {dayjs(String(rest._creationTime)).format("MMM DD, YYYY")} */}
+        </span>
       </div>
       <p className="text-left text-white">{String(message)}</p>
     </div>
