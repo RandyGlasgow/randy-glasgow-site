@@ -6,7 +6,10 @@ export const ToolAndTechElement: FC<{
   title: string;
 }> = ({ Icon, title }) => {
   return (
-    <span className="flex items-center justify-center gap-2 font-semibold">
+    <span
+      className="flex items-center justify-center gap-2 font-semibold cursor-default"
+      title={title}
+    >
       <Icon className="text-2xl" /> {title}
     </span>
   );
