@@ -11,7 +11,7 @@ export const StrengthBar: FC<StrengthBarProps> = ({ strength, label }) => {
       className="flex w-full text-left items-center"
       title={`${label} ${strength}%`}
     >
-      <div className="w-full h-6 bg-slate-50/25 border-spacing-1 border border-slate-500 rounded-full overflow-hidden flex relative">
+      <div className="w-full h-6 bg-stone-50/25 border-spacing-1 border border-stone-500 rounded-full overflow-hidden flex relative">
         <span
           className="absolute flex w-full items-center justify-center text-xs pt-0.5 font-bold tracking[2px]"
           style={{
