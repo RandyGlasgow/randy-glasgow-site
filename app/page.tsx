@@ -1,6 +1,5 @@
 import {
   HeaderOne,
-  Subtitle,
   HeaderTwo,
   HeaderFour,
 } from "@/components/core/Header";

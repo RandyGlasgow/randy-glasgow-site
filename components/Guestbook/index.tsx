@@ -1,176 +1,130 @@
 "use client";
-import { useToggle } from "@/hooks/useToggle";
-import { Dialog } from "../core/Dialog";
+import React, {
+  FC,
+  FormEvent,
+  FormEventHandler,
+  PropsWithChildren,
+  ReactNode,
+  useRef,
+} from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { useEffect, useRef } from "react";
-import { FaCheck, FaX } from "react-icons/fa6";
+import {
+  FaCircleXmark,
+  FaCross,
+  FaRegCircleXmark,
+  FaX,
+  FaXmark,
+} from "react-icons/fa6";
+import dayjs from "dayjs";
 
-const Guestbook = () => {
-  const guests = useQuery(api.guestbook.get);
+export const Guestbook: FC = () => {
+  const guestbookEntries = useQuery(api.guestbook.get);
   const signGuestbook = useMutation(api.guestbook.post);
-  const [isOpen, toggleOpen, setOpen] = useToggle(false);
-  const [isSigning, , setIsSigning] = useToggle(false);
-  const signHereRef = useRef<HTMLButtonElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (isOpen && !isSigning) {
-      signHereRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }
-    if (isOpen && isSigning) {
-      formRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }
-  }, [isOpen, guests, isSigning]);
+  const handleSignGuestbook = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.target as HTMLFormElement);
+
+    const name = form.get("name");
+    const company = form.get("company");
+    const message = form.get("message");
+
+    signGuestbook({
+      name: name as string,
+      company: company as string,
+      message: message as string,
+    });
+    formRef.current?.reset();
+  };
 
   return (
-    <>
-      <button
-        className="border p-2 rounded-md hover:bg-black hover:border-fuchsia-600 hover:shadow-2xl transition-all duration-150 ease-in-out"
-        onClick={toggleOpen}
-      >
-        Sign Guestbook
-      </button>
-      <Dialog isOpen={isOpen} onClose={() => setOpen(false)}>
-        <div className="relative bg-black/40 rounded-none md:rounded overflow-hidden border-transparent md:border-stone-700 border">
-          <nav className="sticky top-0 bg-black border-b border-stone-700 text-white hidden p-2 md:flex justify-between items-center">
-            <span className="p-2">Guest Book</span>
-            <button
-              className="p-2 rounded hover:ring-fuchsia-600 border border-stone-700 hover:border-transparent hover:bg-fuchsia-600 focus:outline-offset-2 focus:outline-fuchsia-500 outline outline-transparent outline-2 transition-all duration-75 ease-in-out"
-              onClick={() => setOpen(false)}
-            >
-              <FaX />
-            </button>
-          </nav>
-          <div
-            id="logs"
-            className="overflow-auto h-screen md:h-[500px] w-full md:w-[500px] bg-black/50 text-white"
-          >
-            <nav className="sticky top-0 bg-black text-white visible md:hidden border-b border-stone-700 p-2 flex justify-between items-center">
-              <button
-                className="p-2 rounded hover:ring-fuchsia-600 border border-stone-700 hover:border-transparent hover:bg-fuchsia-600 focus:outline-offset-2 focus:outline-fuchsia-500 outline outline-transparent outline-2 transition-all duration-75 ease-in-out"
-                onClick={() => setOpen(false)}
-              >
-                Close
-              </button>
-              <button
-                className="p-2 rounded hover:ring-fuchsia-600 border border-stone-700 hover:border-transparent hover:bg-fuchsia-600 focus:outline-offset-2 focus:outline-fuchsia-500 outline outline-transparent outline-2 transition-all duration-75 ease-in-out"
-                onClick={() => setIsSigning(true)}
-              >
-                Sign Here
-              </button>
-            </nav>
-            <div className="p-2">
-              {guests?.map((guest) => (
-                <div
-                  key={guest._id}
-                  id={guest._id}
-                  className="border-b last:border-none border-stone-700 text-left p-2"
-                >
-                  <div className="flex justify-between items-center w-full">
-                    <div className="">
-                      <h3 className="text-lg font-bold">{guest.name}</h3>
-                      <p className="text-sm text-stone-400">
-                        @{guest.company}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-sm py-2">{guest.message}</p>
-                </div>
-              ))}
-            </div>
-
-            {isSigning && (
-              <form
-                onReset={(e) => {
-                  e.preventDefault();
-                  setIsSigning(false);
-                  e.currentTarget.reset();
-                }}
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const form = new FormData(e.currentTarget);
-
-                  const name = form.get("name")?.toString();
-                  const company = form.get("company")?.toString();
-                  const message = form.get("message")?.toString();
-
-                  if (!name || !company)
-                    return alert("Name and Company are required");
-                  signGuestbook({
-                    name: name,
-                    company,
-                    message,
-                  });
-                  setIsSigning(false);
-                  e.currentTarget.reset();
-                }}
-                ref={formRef}
-                className="sticky bottom-0 left-0 border-t border-stone-700 p-2 bg-black"
-              >
-                <div className="flex flex-col space-y-2 text-left">
-                  <label htmlFor="name" className="sr-only">
-                    Name
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="name"
-                    className="border border-stone-700 p-2 bg-inherit placeholder:stone-400 rounded outline-none focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent"
-                    placeholder="Name"
-                  />
-                  <label htmlFor="company" className="sr-only">
-                    Company
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="company"
-                    className="border border-stone-700 p-2 bg-inherit placeholder:stone-400 rounded outline-none focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent"
-                    placeholder="Company"
-                  />
-
-                  <label htmlFor="message" className="sr-only">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    className="border border-stone-700 p-2 bg-inherit placeholder:stone-400 rounded outline-none focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent"
-                    placeholder="Leave a message!"
-                  />
-                </div>
-                <div className="flex justify-between items-center w-full py-2">
-                  <button
-                    className="p-2 rounded hover:ring-fuchsia-600 border border-stone-700 hover:border-transparent hover:bg-fuchsia-600 focus:outline-offset-2 focus:outline-fuchsia-500 outline outline-transparent outline-2 transition-all duration-75 ease-in-out"
-                    type="reset"
-                  >
-                    Cancel
-                  </button>
-                  <button className="p-2 rounded hover:ring-fuchsia-600 border border-stone-700 hover:border-transparent hover:bg-fuchsia-600 focus:outline-offset-2 focus:outline-fuchsia-500 outline outline-transparent outline-2 transition-all duration-75 ease-in-out">
-                    Submit
-                  </button>
-                </div>
-              </form>
-            )}
+    <Dialog.Root>
+      <Dialog.Trigger asChild>
+        <button>Sign Guestbook</button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-lg" />
+        <Dialog.Content className="bg-stone-900 shadow-xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:max-h-[85vh] max-h-screen max-w-2xl rounded border border-stone-600">
+          <div className="flex justify-between items-center text-2xl p-4 border-b border-b-stone-600">
+            <Dialog.Title>Guestbook</Dialog.Title>
+            <Dialog.Close className="px-2 py-2 w-auto rounded-full hover:bg-stone-400 focus:outline-fuchsia-500 outline-4 ring-none outline-none">
+              <FaXmark />
+            </Dialog.Close>
           </div>
-          {!isSigning && (
+          <Dialog.Description className="h-[400px] overflow-auto p-4 bg-transparent grid gap-2 overflow-x-hidden">
+            {guestbookEntries?.map((entry) => (
+              <div>
+                <div className="flex justify-between">
+                  <span className="flex gap-2 items-center justify-start">
+                    <span className="text-lg">{entry.name}</span>
+                    <span className="text-sm text-stone-500">
+                      @{entry.company}
+                    </span>
+                  </span>
+                  <span className="text-stone-500">
+                    {dayjs(new Date(entry._creationTime)).format(
+                      "MMM DD, YYYY"
+                    )}
+                  </span>
+                </div>
+                {entry.message && (
+                  <p className="flex justify-start text-stone-300">
+                    {entry.message}
+                  </p>
+                )}
+              </div>
+            ))}
+          </Dialog.Description>
+          <form
+            className="grid gap-2 p-2 border-t border-t-stone-600"
+            onSubmit={(e) => handleSignGuestbook}
+          >
+            <label htmlFor="name" className="sr-only">
+              Name
+            </label>
+            <input
+              autoComplete={"off"}
+              className="px-2 py-1 w-full focus:outline-fuchsia-500 outline outline-transparent rounded-sm outline-2 bg-stone-700 shadow-inner border-stone-600 border"
+              required
+              type="text"
+              placeholder="Your Name"
+              name="name"
+            />
+            <label htmlFor="company" className="sr-only">
+              Company
+            </label>
+            <input
+              autoComplete={"off"}
+              className="px-2 py-1 w-full focus:outline-fuchsia-500 outline outline-transparent rounded-sm outline-2 bg-stone-700 shadow-inner border-stone-600 border"
+              required
+              type="text"
+              placeholder="Your Company"
+              name="company"
+            />
+            <label htmlFor="message" className="sr-only">
+              Message
+            </label>
+            <textarea
+              autoComplete={"off"}
+              className="px-2 py-1 w-full focus:outline-fuchsia-500 outline outline-transparent rounded-sm outline-2 bg-stone-700 shadow-inner border-stone-600 border"
+              name="message"
+              id="message"
+              placeholder="Leave a message..."
+              maxLength={125}
+            ></textarea>
             <button
-              ref={signHereRef}
-              onClick={() => setIsSigning(true)}
-              className="p-2 hover:ring-fuchsia-600 border border-stone-700 hover:border-transparent hover:bg-fuchsia-600 focus:outline-offset-2 transition-all duration-75 ease-in-out w-full text-white bg-black z-50 border-x-transparent border-b-transparent  outline-none focus:bg-fuchsia-600"
+              type="submit"
+              className="hover:bg-fuchsia-500 focus:bg-fuchsia-500 focus:outline-fuchsia-500 outline outline-transparent rounded-sm py-0.5 uppercase tracking-widest font-semibold"
             >
-              Sign Here
+              Sign Guestbook
             </button>
-          )}
-        </div>
-      </Dialog>
-    </>
+          </form>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 
