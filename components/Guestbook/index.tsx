@@ -1,28 +1,24 @@
 "use client";
-import React, {
-  FC,
-  FormEvent,
-  FormEventHandler,
-  PropsWithChildren,
-  ReactNode,
-  useRef,
-} from "react";
+import React, { FC, FormEvent, useEffect, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import {
-  FaCircleXmark,
-  FaCross,
-  FaRegCircleXmark,
-  FaX,
-  FaXmark,
-} from "react-icons/fa6";
+import { FaXmark } from "react-icons/fa6";
 import dayjs from "dayjs";
 
 export const Guestbook: FC = () => {
   const guestbookEntries = useQuery(api.guestbook.get);
   const signGuestbook = useMutation(api.guestbook.post);
   const formRef = useRef<HTMLFormElement>(null);
+
+  const lastEntryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    lastEntryRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }, [guestbookEntries]);
 
   const handleSignGuestbook = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,8 +32,9 @@ export const Guestbook: FC = () => {
       name: name as string,
       company: company as string,
       message: message as string,
+    }).then(() => {
+      formRef.current?.reset();
     });
-    formRef.current?.reset();
   };
 
   return (
@@ -55,7 +52,7 @@ export const Guestbook: FC = () => {
             </Dialog.Close>
           </div>
           <Dialog.Description className="h-[400px] overflow-auto p-4 bg-transparent grid gap-2 overflow-x-hidden">
-            {guestbookEntries?.map((entry) => (
+            {guestbookEntries?.map((entry, i) => (
               <div>
                 <div className="flex justify-between">
                   <span className="flex gap-2 items-center justify-start">
@@ -77,10 +74,12 @@ export const Guestbook: FC = () => {
                 )}
               </div>
             ))}
+            <div ref={lastEntryRef}></div>
           </Dialog.Description>
           <form
             className="grid gap-2 p-2 border-t border-t-stone-600"
-            onSubmit={(e) => handleSignGuestbook}
+            onSubmit={handleSignGuestbook}
+            ref={formRef}
           >
             <label htmlFor="name" className="sr-only">
               Name
