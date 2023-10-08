@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { IconType } from "react-icons/lib";
 
 export const ToolAndTechElement: FC<{
