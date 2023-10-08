@@ -3,21 +3,18 @@ import React, { FC, FormEvent, useEffect, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { FaXmark } from "react-icons/fa6";
+import { FaChevronDown, FaChevronUp, FaXmark } from "react-icons/fa6";
 import dayjs from "dayjs";
 
 export const Guestbook: FC = () => {
   const guestbookEntries = useQuery(api.guestbook.get);
   const signGuestbook = useMutation(api.guestbook.post);
   const formRef = useRef<HTMLFormElement>(null);
-
   const lastEntryRef = useRef<HTMLDivElement>(null);
 
+  // Scroll to bottom when new entry is added or on initial load
   useEffect(() => {
-    lastEntryRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-    });
+    lastEntryRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [guestbookEntries]);
 
   const handleSignGuestbook = (e: FormEvent<HTMLFormElement>) => {
@@ -51,7 +48,7 @@ export const Guestbook: FC = () => {
               <FaXmark />
             </Dialog.Close>
           </div>
-          <Dialog.Description className="h-[400px] overflow-auto p-4 bg-transparent grid gap-2 overflow-x-hidden">
+          <Dialog.Description className="h-[400px] overflow-auto p-4 bg-transparent grid gap-2 overflow-x-hidden relative">
             {guestbookEntries?.map((entry, i) => (
               <div>
                 <div className="flex justify-between">
