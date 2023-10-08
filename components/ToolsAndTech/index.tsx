@@ -19,7 +19,7 @@ import { ToolAndTechElement } from "./ToolsAndTechElement";
 export const ToolsAndTech: FC = () => {
   return (
     <div
-      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4 w-full sm:w-2/3 mx-auto text-xs
+      className="flex flex-wrap justify-center items-center gap-4 w-full mx-auto text-xs
     align-middle justify-items-center"
     >
       {[
@@ -35,9 +35,11 @@ export const ToolsAndTech: FC = () => {
         { Icon: SiAmazonaws, title: "AWS" },
         { Icon: SiRedis, title: "Redis" },
         { Icon: SiGooglecloud, title: "Google Cloud" },
-      ].map((elm) => (
-        <ToolAndTechElement {...elm} />
-      ))}
+      ]
+        .sort((a, b) => a.title.localeCompare(b.title))
+        .map((elm) => (
+          <ToolAndTechElement {...elm} />
+        ))}
     </div>
   );
 };

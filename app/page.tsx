@@ -33,7 +33,6 @@ export default async function Home() {
             alt="Randy Glasgow"
             className="mx-auto rounded-full overflow-hidden object-cover object-center border border-slate-400 h-80 w-80 m-10 border-dashed border-spacing-2 p-2"
           />
-          <Guestbook />
         </Page.Content>
         <Page.Content id="Core Competencies">
           <HeaderTwo className="text-center">Core Competencies</HeaderTwo>
@@ -65,7 +64,7 @@ export default async function Home() {
           <HeaderTwo className="text-center">
             Languages & Frameworks
           </HeaderTwo>
-          <div className="flex sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
+          <div className="grid grid-cols-2 mx-auto justify-center items-center w-full gap-4 flex-wrap my-8">
             {[
               { label: "React", strength: 95 },
               { label: "Typescript", strength: 90 },
@@ -93,7 +92,7 @@ export default async function Home() {
           </div>
         </Page.Content>
         <Page.Content>
-          <HeaderTwo className="">Projects</HeaderTwo>
+          <HeaderTwo className="text-center">Projects</HeaderTwo>
           <div className="flex flex-col sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
             <ProjectCard
               title={"Relay It"}
@@ -128,6 +127,7 @@ export default async function Home() {
           </div>
         </Page.Content>
         <Page.Footer className="py-8 gap-4 grid">
+          <Guestbook />
           <HeaderFour className="text-slate-400">Made using</HeaderFour>
           <div className="flex mx-auto items-center justify-center gap-3">
             <Link href="https://nextjs.org/">

@@ -5,13 +5,10 @@ interface StrengthBarProps {
   strength: number;
 }
 
-const getPercentageWidthFromNum = (num: number): `w-${number}%` => {
-  return `w-${num}%`;
-};
 export const StrengthBar: FC<StrengthBarProps> = ({ strength, label }) => {
   return (
     <span
-      className="flex w-1/3 text-left items-center"
+      className="flex w-full text-left items-center"
       title={`${label} ${strength}%`}
     >
       <div className="w-full h-6 bg-slate-50/25 border-spacing-1 border border-slate-500 rounded-full overflow-hidden flex relative">
