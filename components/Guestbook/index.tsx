@@ -37,13 +37,17 @@ export const Guestbook: FC = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button>Sign Guestbook</button>
+        <button className="animate-pulse hover:animate-none border rounded p-2 uppercase hover:bg-fuchsia-600 font-bold tracking-widest">
+          Sign Guestbook
+        </button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-lg" />
         <Dialog.Content className="bg-stone-900 shadow-xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:max-h-[85vh] max-h-screen max-w-2xl rounded border border-stone-600">
           <div className="flex justify-between items-center text-2xl p-4 border-b border-b-stone-600">
-            <Dialog.Title>Guestbook</Dialog.Title>
+            <Dialog.Title className="tracking-widest">
+              Guestbook
+            </Dialog.Title>
             <Dialog.Close className="px-2 py-2 w-auto rounded-full hover:bg-stone-400 focus:outline-fuchsia-500 outline-4 ring-none outline-none">
               <FaXmark />
             </Dialog.Close>
