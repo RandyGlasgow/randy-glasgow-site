@@ -3,14 +3,25 @@ import React, { FC, FormEvent, useEffect, useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { FaChevronDown, FaChevronUp, FaXmark } from "react-icons/fa6";
+import { FaXmark } from "react-icons/fa6";
 import dayjs from "dayjs";
+import { useRepeatVisit } from "@/hooks/useRepeatVisit";
 
 export const Guestbook: FC = () => {
   const guestbookEntries = useQuery(api.guestbook.get);
   const signGuestbook = useMutation(api.guestbook.post);
+  const guestbookBtnRef = useRef<HTMLButtonElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const lastEntryRef = useRef<HTMLDivElement>(null);
+  useRepeatVisit("repeat-visit", async () => {
+    if (!guestbookBtnRef.current) return;
+    if (!guestbookBtnRef.current) return;
+
+    guestbookBtnRef.current.scrollIntoView({ behavior: "smooth" });
+    await setTimeout(() => guestbookBtnRef.current?.focus(), 1000);
+
+    await setTimeout(() => guestbookBtnRef.current?.click(), 2000);
+  });
 
   // Scroll to bottom when new entry is added or on initial load
   useEffect(() => {
@@ -29,15 +40,16 @@ export const Guestbook: FC = () => {
       name: name as string,
       company: company as string,
       message: message as string,
-    }).then(() => {
-      formRef.current?.reset();
-    });
+    }).then(() => formRef.current?.reset());
   };
 
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="animate-pulse hover:animate-none border rounded p-2 uppercase hover:bg-fuchsia-600 font-bold tracking-widest">
+        <button
+          className="animate-pulse hover:animate-none border rounded p-2 uppercase hover:bg-fuchsia-600 font-bold tracking-widest focus:bg-fuchsia-600 outline-none focus:animate-none"
+          ref={guestbookBtnRef}
+        >
           Sign Guestbook
         </button>
       </Dialog.Trigger>

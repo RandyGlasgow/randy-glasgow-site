@@ -17,7 +17,7 @@ import { StrengthBar } from "@/components/StrengthBar";
 import { ToolsAndTech } from "@/components/ToolsAndTech";
 import Guestbook from "@/components/Guestbook";
 
-export default async function Home() {
+export default function Home() {
   return (
     <Page.Root>
       <div className="min-h-screen matrix">
