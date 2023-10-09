@@ -130,13 +130,22 @@ export default function Home() {
           <Guestbook />
           <HeaderFour className="text-stone-400">Made using</HeaderFour>
           <div className="flex mx-auto items-center justify-center gap-3">
-            <Link href="https://nextjs.org/">
+            <Link
+              href="https://nextjs.org/"
+              aria-label="Learn more about NextJs"
+            >
               <TbBrandNextjs className="text-3xl text-stone-400 hover:text-white" />
             </Link>
-            <Link href="https://react.dev/">
+            <Link
+              href="https://react.dev/"
+              aria-label="Learn more about ReactJs"
+            >
               <FaReact className="text-3xl text-stone-400 hover:text-white" />
             </Link>
-            <Link href="https://tailwindcss.com/">
+            <Link
+              href="https://tailwindcss.com/"
+              aria-label="Learn more about Tailwindcss"
+            >
               <SiTailwindcss className="text-3xl text-stone-400 hover:text-white " />
             </Link>
           </div>
