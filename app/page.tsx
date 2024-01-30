@@ -11,7 +11,6 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { KeywordGroup } from "@/components/KeywordGroup/indext";
 import { StrengthBar } from "@/components/StrengthBar";
 import { ToolsAndTech } from "@/components/ToolsAndTech";
-import Guestbook from "@/components/Guestbook";
 
 export default function Home() {
   return (
