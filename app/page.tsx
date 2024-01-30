@@ -1,8 +1,4 @@
-import {
-  HeaderOne,
-  HeaderTwo,
-  HeaderFour,
-} from "@/components/core/Header";
+import { HeaderOne, HeaderTwo, HeaderFour } from "@/components/core/Header";
 import NavigationBar from "@/components/core/NavigationBar";
 import Page from "@/components/core/Page";
 import Link from "next/link";
@@ -20,23 +16,21 @@ import Guestbook from "@/components/Guestbook";
 export default function Home() {
   return (
     <Page.Root>
-      <div className="min-h-screen matrix">
+      <div className="matrix min-h-screen">
         <NavigationBar.Root></NavigationBar.Root>
         <Page.Content className="text-center">
-          <HeaderOne className="text-white text-6xl">
-            Randy Glasgow
-          </HeaderOne>
+          <HeaderOne className="text-6xl text-white">Randy Glasgow</HeaderOne>
           <Image
             src={ProfilePhoto}
             quality={40}
             loading="eager"
             alt="Randy Glasgow"
-            className="mx-auto rounded-full overflow-hidden object-cover object-center border border-stone-400 h-80 w-80 m-10 border-dashed border-spacing-2 p-2"
+            className="m-10 mx-auto h-80 w-80 border-spacing-2 overflow-hidden rounded-full border border-dashed border-stone-400 object-cover object-center p-2"
           />
         </Page.Content>
         <Page.Content id="Core Competencies">
           <HeaderTwo className="text-center">Core Competencies</HeaderTwo>
-          <div className="flex sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
+          <div className="mx-auto my-8 flex w-full flex-wrap items-center justify-center gap-4 sm:flex-row sm:items-stretch">
             <KeywordGroup
               keywords={[
                 "Agile",
@@ -61,10 +55,8 @@ export default function Home() {
           </div>
         </Page.Content>
         <Page.Content id="Languages & Frameworks">
-          <HeaderTwo className="text-center">
-            Languages & Frameworks
-          </HeaderTwo>
-          <div className="grid grid-cols-2 mx-auto justify-center items-center w-full gap-4 flex-wrap my-8">
+          <HeaderTwo className="text-center">Languages & Frameworks</HeaderTwo>
+          <div className="mx-auto my-8 grid w-full grid-cols-2 flex-wrap items-center justify-center gap-4">
             {[
               { label: "React", strength: 95 },
               { label: "Typescript", strength: 90 },
@@ -74,8 +66,8 @@ export default function Home() {
               { label: "Tailwindcss", strength: 90 },
               { label: "NextJs", strength: 92 },
               { label: "NodeJs", strength: 88 },
-              { label: "Rust", strength: 55 },
               { label: "Python", strength: 60 },
+              { label: "Go", strength: 60 },
             ]
               .sort((a, b) => b.strength - a.strength)
               .map((elm) => (
@@ -84,16 +76,14 @@ export default function Home() {
           </div>
         </Page.Content>
         <Page.Content>
-          <HeaderTwo className="text-center">
-            Tools & Technologies
-          </HeaderTwo>
+          <HeaderTwo className="text-center">Tools & Technologies</HeaderTwo>
           <div className="my-8">
             <ToolsAndTech />
           </div>
         </Page.Content>
         <Page.Content>
           <HeaderTwo className="text-center">Projects</HeaderTwo>
-          <div className="flex flex-col sm:flex-row mx-auto justify-center items-center sm:items-stretch w-full gap-4 flex-wrap my-8">
+          <div className="mx-auto my-8 flex w-full flex-col flex-wrap items-center justify-center gap-4 sm:flex-row sm:items-stretch">
             <ProjectCard
               title={"Relay It"}
               // projectLink={"https://relay-it.dev"}
@@ -124,12 +114,16 @@ export default function Home() {
                 "Computology is a weekend project evolving into a SaaS product. It aims to offer a platform for developers, designers, and creatives to collaborate using Generative Pre-trained Transformers like ChatGPT-4."
               }
             />
+            <ProjectCard
+              description="Ever want to visualize the entropy in your code? Entropy-Go does just that."
+              tags={["Go", "Entropy"]}
+              title="Entropy-Go"
+            />
           </div>
         </Page.Content>
-        <Page.Footer className="py-8 gap-4 grid">
-          <Guestbook />
+        <Page.Footer className="grid gap-4 py-8">
           <HeaderFour className="text-stone-400">Made using</HeaderFour>
-          <div className="flex mx-auto items-center justify-center gap-3">
+          <div className="mx-auto flex items-center justify-center gap-3">
             <Link
               href="https://nextjs.org/"
               aria-label="Learn more about NextJs"
